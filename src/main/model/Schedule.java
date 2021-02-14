@@ -39,6 +39,7 @@ public class Schedule {
     //EFFECTS: change status of task to complete
     public void markAsComplete(Task task) {
         task.setStatus("complete");
+        mySchedule.set(task.getTime(), task);
 
     }
 
