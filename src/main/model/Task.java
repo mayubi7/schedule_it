@@ -1,12 +1,16 @@
 package model;
 
 
-// NOTE: ADD COMMENTS BASED ON GENERAL REQUIREMENTS LATER
+// Represents a task with its name, scheduled time and
+// the status of the task (either "unfinished" or "complete")
 public class Task {
     private String name;
     private int scheduledTime;
     private String status;
 
+    //REQUIRES: String is non-empty and Integer is between 0-23
+    //EFFECTS: Assigns string to name and integer to the scheduled time,
+    // the status is set to "unfinished"
     public Task(String name, Integer time) {
         this.name = name;
         this.scheduledTime = time;

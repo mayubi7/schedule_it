@@ -7,15 +7,20 @@ import model.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// Schedule Application
 public class ScheduleApp {
+    //template based on Teller app example
 
     private Scanner input;
     private Schedule mySchedule;
 
+    //EFFECTS: runs Schedule app
     public ScheduleApp() {
         runSchedule();
     }
 
+    //MODIFIES: this
+    //EFFECTS: processes user input
     private void runSchedule() {
         boolean keepGoing = true;
         String command = null;
@@ -38,6 +43,7 @@ public class ScheduleApp {
 
     }
 
+    //EFFECTS: displays menu of options to choose from to user
     private void displayMenu() {
         System.out.println("\nSelect from:");
         System.out.println("\t a -> add new task(s)");
@@ -48,11 +54,15 @@ public class ScheduleApp {
         System.out.println("\t q -> quit");
     }
 
+    //MODIFIES: this
+    //EFFECTS: initializes Schedule
     private void init() {
         mySchedule = new Schedule();
         input = new Scanner(System.in);
     }
 
+    //MODIFIES: this
+    //EFFECTS: processes user command
     private void processCommand(String command) {
         if (command.equals("a")) {
             doAddNewTask();
@@ -69,6 +79,8 @@ public class ScheduleApp {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: deletes task given its name and time
     private void doDelete() {
         System.out.println("Enter task to delete: ");
         String taskName = input.next();
@@ -80,12 +92,15 @@ public class ScheduleApp {
 
     }
 
+    //EFFECTS: lists task names of the tasks that are not complete
     private void doListAllTasks() {
         for (int i = 0; i < mySchedule.listTasksTodo().size(); i++) {
             System.out.println(mySchedule.listTasksTodo().get(i));
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: given name and time of a task, changes its status to complete
     private void doMarkAsComplete() {
         System.out.println("Enter completed task: ");
         String taskName = input.next();
@@ -97,6 +112,8 @@ public class ScheduleApp {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: given name, old time, new time, changes task's scheduled time from old to the new time
     private void doReschedule() {
         System.out.println("Enter task: ");
         String taskName = input.next();
@@ -109,17 +126,20 @@ public class ScheduleApp {
         mySchedule.reschedule(todo, newTime);
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds the list of tasks to schedule at appropriate time
     private void doAddNewTask() {
         ArrayList<Task> tasks = describeTasks();
         mySchedule.addNewTask(tasks);
     }
 
+    //EFFECTS: takes in task names with task times and creates a list of tasks
     private ArrayList<Task> describeTasks() {
         ArrayList<Task> todos = new ArrayList<>();
         boolean addMore = true;
 
         while (addMore) {
-            System.out.println("Enter task or done if finished adding to schedule:");
+            System.out.println("Enter task name or done if finished adding to schedule:");
             String taskName = input.next();
             input.nextLine();
             if (taskName.equals("done")) {
@@ -136,6 +156,9 @@ public class ScheduleApp {
         return todos;
 
     }
+
+
+
 
 
 }

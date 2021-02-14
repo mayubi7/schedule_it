@@ -1,38 +1,34 @@
-# Planner App
+# Schedule App
 
-## Plan your time
 
 
 **Project Proposal:**
 
-The application I am designing is a planner app. This app will help keep track of events and todo lists while also
-boosting one's productivity. The monthly view will provide an overview of events or deadlines coming up. The weekly 
-view will provide a break-down of the week ahead and of the smaller tasks that need to get done. Using the ideas of 
-time-blocking, this app will allow one to schedule not only the nature of the task, but also the time when one will 
-work on it. Additionally, a habit tracker will be built into the app. This will allow users to add habits that they 
-want to work on and check them off daily, weekly or monthly depending on their choice. 
-This application helps one get their professional life in order through scheduling while also motivating
- them to continue working on their personal goals by tracking their habits. 
+The application I am designing is a scheduling app. This app will help keep track of events and todo lists; hence,
+boosting one's productivity. A user can schedule tasks into a 24-hour schedule. In the future steps of the project 
+I would like to create a weekly view spread which would show the schedule for the entire week. Additionally, I would like 
+to add tags which can be set for a certain colour so that tasks have a certain colour representing if they are school,
+ work, events, etc. 
  
- Some Features:
- - monthly view: shows events and deadlines in the month ahead
- - weekly view: shows schedule of the week ahead along with todo list items
- - habit tracker: helps track daily, weekly or monthly habits of one's choice
+ Some Features I'd like to add throughout the term:
+ - weekly view showing schedule of the week ahead
+ - tags and colours so that the tasks can be organized by category
+ - possibly a habit tracker that helps track daily, weekly or monthly habits of one's choice
  
  
  This app can be used by anyone who wants to organize their time. It may be especially useful for students in helping 
  them keep track of assignments and schedule their study time. This project interests me because I have seen the 
- benefits of using a planner and scheduling time in my own life. Scheduling time has always been important in boosting 
+ benefits of using a planner and scheduling time in my own life. The act has always been important in boosting 
  productivity; however, with the current pandemic and the shift towards online classes it's usefulness has only 
- increased. Clearly dividing one's work time and down time can be extremely useful in managing stress and one's overall 
- mental health. The idea of planning one's time is simple, but it's impact is profound. Therefore, I am looking forward to 
- creating this app!
+ increased. I have found that todo lists can be useful; however, the act of scheduling each task to a certain
+  time has a significant impact on one's productivity and allows for more free-time! 
  
  ##User Stories
- - As a user, I want to be able to add a task with the time to my weekly schedule
+ - As a user, I want to be able to any number of tasks with their times to my schedule
  - As a user, I want to be able to mark a task as completed on my weekly schedule
- - As a user, I want to be able to reschedule a task to a different time on my weekly schedule
- - As a user, I want to be able to add a habit and its frequency to my habit tracker
+ - As a user, I want to be able to reschedule a task to a different time on my schedule
+ - As a user, I want to be able to delete a task from my schedule
+ - As a user, I want to be able to view a list of all incomplete tasks for the day
  
  
  
