@@ -1,0 +1,17 @@
+{
+    "name": "My schedule",
+    "tasks": [
+        {
+            "name": "run",
+            "time": 5
+        },
+        {
+            "name": "dance",
+            "time": 8
+        },
+        {
+            "name": "meeting",
+            "time": 10
+        }
+    ]
+}

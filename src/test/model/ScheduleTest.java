@@ -16,8 +16,8 @@ class ScheduleTest {
 
     @BeforeEach
     public void setup() {
-        s1 = new Schedule();
-        s2 = new Schedule();
+        s1 = new Schedule("my schedule");
+        s2 = new Schedule("my schedule for Tuesday");
     }
 
     @Test
@@ -146,7 +146,7 @@ class ScheduleTest {
     @Test
     public void testDeleteTask() {
         Task todo1 = new Task("meeting", 10);
-        Task todo2 = new Task("homework", 12);
+        Task todo2 = new Task("homework", 23);
 
         ArrayList<Task> list1 = new ArrayList<>();
         list1.add(todo1);
@@ -157,8 +157,8 @@ class ScheduleTest {
         list2.add(todo2);
         s2.addNewTask(list2);
 
-        s1.deleteTask(todo1);
-        s2.deleteTask(todo2);
+        s1.deleteTask(10);
+        s2.deleteTask(23);
 
         List<String> taskNames = new ArrayList<>();
         List<String> taskNames2 = new ArrayList<>();
@@ -220,7 +220,7 @@ class ScheduleTest {
         s1.addNewTask(list1);
         s2.addNewTask(list2);
 
-        s1.deleteTask(todo2);
+        s1.deleteTask(8);
         s2.markAsComplete(todo3);
 
         List<String> names1 = new ArrayList<>();
@@ -237,6 +237,25 @@ class ScheduleTest {
 
         assertEquals(2, s1.listTasksTodo().size());
         assertEquals(3, s2.listTasksTodo().size());
+
+    }
+
+    @Test
+    public void testFindByName() {
+        Task todo1 = new Task("meeting", 10);
+        Task todo2 = new Task("homework", 23);
+
+        ArrayList<Task> list1 = new ArrayList<>();
+        list1.add(todo1);
+        s1.addNewTask(list1);
+
+        ArrayList<Task> list2 = new ArrayList<>();
+        list2.add(todo1);
+        list2.add(todo2);
+        s2.addNewTask(list2);
+
+        assertEquals(10,s1.findByName("meeting").getTime());
+        assertEquals(23,s2.findByName("homework").getTime());
 
     }
 

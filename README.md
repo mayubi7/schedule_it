@@ -31,6 +31,11 @@ to add tags which can be set for a certain colour so that tasks have a certain c
  - As a user, I want to be able to view a list of all incomplete tasks for the day
  
  
+##Phase 2 User Stories
+- As a user, I want to be able to save my schedule to file
+- As a user, I want to be able to load my schedule from file
+ 
+ 
  
  
  

@@ -1,9 +1,12 @@
 package ui;
 
-
 import model.Schedule;
 import model.Task;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,11 +14,14 @@ import java.util.Scanner;
 public class ScheduleApp {
     //template based on Teller app example
 
+    private static final String JSON_STORE = "./data/schedule.json";
     private Scanner input;
     private Schedule mySchedule;
+    private JsonReader jsonReader;
+    private JsonWriter jsonWriter;
 
     //EFFECTS: runs Schedule app
-    public ScheduleApp() {
+    public ScheduleApp() throws FileNotFoundException {
         runSchedule();
     }
 
@@ -48,17 +54,21 @@ public class ScheduleApp {
         System.out.println("\nSelect from:");
         System.out.println("\t a -> add new task(s)");
         System.out.println("\t d -> delete a task");
-        System.out.println("\t l -> list all incomplete tasks");
+        System.out.println("\t p -> print all incomplete tasks");
         System.out.println("\t m -> mark a task as complete");
         System.out.println("\t r -> reschedule a task");
+        System.out.println("\t s -> save schedule to file");
+        System.out.println("\t l -> load schedule from file");
         System.out.println("\t q -> quit");
     }
 
     //MODIFIES: this
     //EFFECTS: initializes Schedule
     private void init() {
-        mySchedule = new Schedule();
         input = new Scanner(System.in);
+        mySchedule = new Schedule("My schedule");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     //MODIFIES: this
@@ -68,12 +78,16 @@ public class ScheduleApp {
             doAddNewTask();
         } else if (command.equals("d")) {
             doDelete();
-        } else if (command.equals("l")) {
+        } else if (command.equals("p")) {
             doListAllTasks();
         } else if (command.equals("m")) {
             doMarkAsComplete();
         } else if (command.equals("r")) {
             doReschedule();
+        } else if (command.equals("s")) {
+            saveSchedule();
+        } else if (command.equals("l")) {
+            loadSchedule();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -82,13 +96,9 @@ public class ScheduleApp {
     //MODIFIES: this
     //EFFECTS: deletes task given its name and time
     private void doDelete() {
-        System.out.println("Enter task to delete: ");
-        String taskName = input.next();
-        input.nextLine();
         System.out.println("Enter time: ");
         int time = input.nextInt();
-        Task todo1 = new Task(taskName, time);
-        mySchedule.deleteTask(todo1);
+        mySchedule.deleteTask(time);
 
     }
 
@@ -105,10 +115,7 @@ public class ScheduleApp {
         System.out.println("Enter completed task: ");
         String taskName = input.next();
         input.nextLine();
-        System.out.println("Enter time: ");
-        Integer time = input.nextInt();
-        Task todo = new Task(taskName, time);
-        mySchedule.markAsComplete(todo);
+        mySchedule.markAsComplete(mySchedule.findByName(taskName));
 
     }
 
@@ -118,12 +125,9 @@ public class ScheduleApp {
         System.out.println("Enter task: ");
         String taskName = input.next();
         input.nextLine();
-        System.out.println("Enter original scheduled time: ");
-        int time = input.nextInt();
         System.out.println("Enter new time for task: ");
         int newTime = input.nextInt();
-        Task todo = new Task(taskName, time);
-        mySchedule.reschedule(todo, newTime);
+        mySchedule.reschedule(mySchedule.findByName(taskName), newTime);
     }
 
     //MODIFIES: this
@@ -157,8 +161,28 @@ public class ScheduleApp {
 
     }
 
+    // EFFECTS: saves schedule to file
+    private void saveSchedule() {
+        // code copied and modified from JsonSerializationDemo
+        try {
+            jsonWriter.open();
+            jsonWriter.write(mySchedule);
+            jsonWriter.close();
+            System.out.println("Saved " + mySchedule.getName() + " to" + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
 
-
-
-
+    // MODIFIES: this
+    // EFFECTS: loads schedule from file
+    private void loadSchedule() {
+        // code copied and modified from JsonSerializationDemo
+        try {
+            mySchedule = jsonReader.read();
+            System.out.println("Loaded " + mySchedule.getName() + " from" + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
 }

@@ -1,9 +1,15 @@
 package ui;
 
-import model.Schedule;
 
+import java.io.FileNotFoundException;
+
+// starts Schedule App
 public class Main {
     public static void main(String[] args) {
-        new ScheduleApp();
+        try {
+            new ScheduleApp();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to run application: file not found");
+        }
     }
 }

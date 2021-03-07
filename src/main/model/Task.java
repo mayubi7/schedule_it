@@ -1,9 +1,12 @@
 package model;
 
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a task with its name, scheduled time and
 // the status of the task (either "unfinished" or "complete")
-public class Task {
+public class Task implements Writable {
     private String name;
     private int scheduledTime;
     private String status;
@@ -40,4 +43,12 @@ public class Task {
     }
 
 
+    @Override
+    public JSONObject toJson() {
+        // code copied and modified from JsonSerializationDemo
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("time", scheduledTime);
+        return json;
+    }
 }
