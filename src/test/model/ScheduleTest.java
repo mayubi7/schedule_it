@@ -256,8 +256,30 @@ class ScheduleTest {
 
         assertEquals(10,s1.findByName("meeting").getTime());
         assertEquals(23,s2.findByName("homework").getTime());
-
+        assertTrue(s1.findByName("magic class") == null);
     }
 
+    @Test
+    public void testGetTasksZero() {
+        assertEquals(0,s1.getTasks().size());
+        assertEquals(0,s2.getTasks().size());
+    }
 
+    @Test
+    public void testGetTasksNonZero() {
+        Task todo1 = new Task("meeting", 10);
+        Task todo2 = new Task("homework", 23);
+
+        ArrayList<Task> list1 = new ArrayList<>();
+        list1.add(todo1);
+        s1.addNewTask(list1);
+
+        ArrayList<Task> list2 = new ArrayList<>();
+        list2.add(todo1);
+        list2.add(todo2);
+        s2.addNewTask(list2);
+
+        assertEquals(1, s1.getTasks().size());
+        assertEquals(2, s2.getTasks().size());
+    }
 }
