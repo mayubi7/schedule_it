@@ -49,6 +49,7 @@ public class Task implements Writable {
         JSONObject json = new JSONObject();
         json.put("name", name);
         json.put("time", scheduledTime);
+        json.put("status", status);
         return json;
     }
 }

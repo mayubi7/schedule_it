@@ -58,13 +58,11 @@ public class JsonReader {
             JSONObject nextTask = (JSONObject) json;
             String name = nextTask.getString("name");
             Integer time = nextTask.getInt("time");
+            String status = nextTask.getString("status");
             Task task = new Task(name,time);
+            task.setStatus(status);
             tasks.add(task);
         }
         s.addNewTask(tasks);
     }
-
-
-
-
 }

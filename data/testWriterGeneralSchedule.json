@@ -3,11 +3,13 @@
     "tasks": [
         {
             "name": "meeting",
-            "time": 10
+            "time": 10,
+            "status": "unfinished"
         },
         {
             "name": "homework",
-            "time": 15
+            "time": 15,
+            "status": "unfinished"
         }
     ]
 }

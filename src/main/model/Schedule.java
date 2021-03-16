@@ -119,6 +119,7 @@ public class Schedule implements Writable {
         return name;
     }
 
+    // EFFECTS: returns a list of all tasks in schedule
     public List<Task> getTasks() {
         List<Task> tasks = new ArrayList<>();
         for (int i = 0; i <= 23; i++) {

@@ -113,8 +113,7 @@ public class ScheduleApp {
     //EFFECTS: given name and time of a task, changes its status to complete
     private void doMarkAsComplete() {
         System.out.println("Enter completed task: ");
-        String taskName = input.next();
-        input.nextLine();
+        String taskName = getNextLine();
         mySchedule.markAsComplete(mySchedule.findByName(taskName));
 
     }
@@ -123,8 +122,7 @@ public class ScheduleApp {
     //EFFECTS: given name, old time, new time, changes task's scheduled time from old to the new time
     private void doReschedule() {
         System.out.println("Enter task: ");
-        String taskName = input.next();
-        input.nextLine();
+        String taskName = getNextLine();
         System.out.println("Enter new time for task: ");
         int newTime = input.nextInt();
         mySchedule.reschedule(mySchedule.findByName(taskName), newTime);
@@ -144,8 +142,7 @@ public class ScheduleApp {
 
         while (addMore) {
             System.out.println("Enter task name or done if finished adding to schedule:");
-            String taskName = input.next();
-            input.nextLine();
+            String taskName = getNextLine();
             if (taskName.equals("done")) {
                 addMore = false;
             } else {
@@ -158,7 +155,14 @@ public class ScheduleApp {
             }
         }
         return todos;
+    }
 
+    private String getNextLine() {
+        String taskNameSoFar = "";
+        while (taskNameSoFar.isEmpty()) {
+            taskNameSoFar = taskNameSoFar + input.nextLine();
+        }
+        return taskNameSoFar;
     }
 
     // EFFECTS: saves schedule to file

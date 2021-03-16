@@ -2,11 +2,13 @@
   "tasks": [
     {
       "name": "run",
-      "time": 7
+      "time": 7,
+      "status": "unfinished"
     },
     {
       "name": "breakfast",
-      "time": 9
+      "time": 9,
+      "status": "complete"
     }
   ],
   "name": "My schedule"
