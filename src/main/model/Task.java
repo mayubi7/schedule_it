@@ -4,6 +4,8 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import javax.swing.*;
+
 // Represents a task with its name, scheduled time and
 // the status of the task (either "unfinished" or "complete")
 public class Task implements Writable {

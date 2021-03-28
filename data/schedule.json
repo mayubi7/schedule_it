@@ -1,19 +1,14 @@
 {
-    "name": "My schedule",
+    "name": "My Schedule",
     "tasks": [
         {
-            "name": "go for a walk",
+            "name": "meeting",
             "time": 10,
-            "status": "complete"
-        },
-        {
-            "name": "brunch with Ivena",
-            "time": 13,
             "status": "unfinished"
         },
         {
-            "name": "cpsc210 lab",
-            "time": 14,
+            "name": "brunch",
+            "time": 13,
             "status": "unfinished"
         }
     ]
