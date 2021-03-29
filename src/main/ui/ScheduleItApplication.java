@@ -202,7 +202,7 @@ public class ScheduleItApplication extends JFrame implements ActionListener {
 
     // EFFECTS: marks task as complete in schedule
     private void completeTask() {
-        Task todo = new Task(field.getText(), Integer.parseInt(field2.getText()));
+        Task todo = new Task(field4.getText(), Integer.parseInt(field5.getText()));
         schedule.markAsComplete(todo);
         showSchedule();
     }
