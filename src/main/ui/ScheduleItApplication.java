@@ -93,21 +93,13 @@ public class ScheduleItApplication extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
     }
 
-    // TODO ISSUE THO: ADDING MULTIPLE TASKS AT SAME TIME
+    // MODIFIES: this
+    // adds/removes task to schedule or loads/save schedule
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("myButton")) {
-            playSound(SOUND_FILE);
-            label.setText(field2.getText() + "hrs: " + field.getText() + " added to schedule if timeslot available.");
-            Task todo = new Task(field.getText(), Integer.parseInt(field2.getText()));
-            ArrayList<Task> tasks = new ArrayList<>();
-            tasks.add(todo);
-            schedule.addNewTask(tasks);
-            showSchedule();
+            addTask();
         } else if (e.getActionCommand().equals("RemoveButton")) {
-            String details = field3.getText() + "hrs: cleared.";
-            label.setText(details);
-            schedule.deleteTask(Integer.parseInt(field3.getText()));
-            showSchedule();
+            removeTask();
         } else if (e.getActionCommand().equals("SaveButton")) {
             try {
                 jsonWriter.open();
@@ -126,7 +118,29 @@ public class ScheduleItApplication extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes task from schedule and shows change in panel
+    private void removeTask() {
+        String details = field3.getText() + "hrs: cleared.";
+        label.setText(details);
+        schedule.deleteTask(Integer.parseInt(field3.getText()));
+        showSchedule();
+    }
 
+    // MODIFIES: this
+    // EFFECTS: adds task to schedule and shows change in panel
+    private void addTask() {
+        playSound(SOUND_FILE);
+        label.setText(field2.getText() + "hrs: " + field.getText() + " added to schedule if timeslot available.");
+        Task todo = new Task(field.getText(), Integer.parseInt(field2.getText()));
+        ArrayList<Task> tasks = new ArrayList<>();
+        tasks.add(todo);
+        schedule.addNewTask(tasks);
+        showSchedule();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: makes a panel that shows the tasks in the schedule
     private void showSchedule() {
         displayTasks = new JPanel();
         displayTasks.setPreferredSize(new Dimension(500,300));
@@ -147,8 +161,8 @@ public class ScheduleItApplication extends JFrame implements ActionListener {
         }
     }
 
-    // TODO: ADD MODIFIES AND STUFF
-    // TODO: ALSO, CANT SEE FLAG STUFF FIX MAKE THEM ALL BORDER LAYOUT
+    // MODIFIES: this
+    // EFFECTS: draws the remove task button onto the JFrame
     private void removeTaskButton() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(400, 150));
@@ -169,6 +183,8 @@ public class ScheduleItApplication extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
     }
 
+    // MODIFIES: this
+    // EFFECTS: draws the save schedule button onto the JFrame
     private void saveButton() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(400, 150));
@@ -180,6 +196,8 @@ public class ScheduleItApplication extends JFrame implements ActionListener {
         add(btn);
     }
 
+    // MODIFIES: this
+    // EFFECTS: draws the load schedule button onto the JFrame
     private void loadButton() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(400, 150));
@@ -191,6 +209,8 @@ public class ScheduleItApplication extends JFrame implements ActionListener {
         add(btn);
     }
 
+    // MODIFIES: this
+    // EFFECTS: plays the sound from file given
     public void playSound(String soundName) {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
