@@ -31,10 +31,14 @@ public class ScheduleItApplication extends JFrame implements ActionListener {
 
     private Schedule schedule;
     private JLabel label;
+    private JLabel label2;
     private JTextField field;
     private JTextField field2;
     private JTextField field3;
+    private JTextField field4;
+    private JTextField field5;
     private JPanel displayTasks;
+    private JPanel panel;
     private JsonReader jsonReader;
     private JsonWriter jsonWriter;
 
@@ -61,6 +65,7 @@ public class ScheduleItApplication extends JFrame implements ActionListener {
         setResizable(false);
         addTaskButton();
         removeTaskButton();
+        completeButton();
         saveButton();
         loadButton();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,6 +99,80 @@ public class ScheduleItApplication extends JFrame implements ActionListener {
     }
 
     // MODIFIES: this
+    // EFFECTS: draws the remove task button onto the JFrame
+    private void removeTaskButton() {
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new Dimension(400, 150));
+        ((JPanel) getContentPane()).setBorder(new EmptyBorder(13, 13, 13, 13));
+        setLayout(new FlowLayout());
+        JButton btn = new JButton("Remove Task");
+        btn.setActionCommand("RemoveButton");
+        btn.addActionListener(this);
+
+        JLabel label = new JLabel("flag");
+        JLabel addTime = new JLabel("Time to clear:");
+        field3 = new JTextField(5);
+        add(addTime);
+        add(field3);
+        add(btn);
+        add(label);
+        pack();
+        setLocationRelativeTo(null);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: draws the mark as complete task button onto the JFrame
+    private void completeButton() {
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new Dimension(100, 200));
+        ((JPanel) getContentPane()).setBorder(new EmptyBorder(13, 13, 13, 13));
+        setLayout(new FlowLayout());
+        JButton btn = new JButton("Mark task as complete");
+        btn.setActionCommand("complete");
+        btn.addActionListener(this);
+
+        JLabel label = new JLabel("flag");
+        JLabel addDescription = new JLabel("Completed Task:");
+        JLabel addTime = new JLabel("Scheduled Time:");
+        field4 = new JTextField(5);
+        field5 = new JTextField(5);
+        add(addDescription, BorderLayout.WEST);
+        add(field4);
+        add(addTime);
+        add(field5);
+        add(btn);
+        add(label);
+        pack();
+        setLocationRelativeTo(null);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: draws the save schedule button onto the JFrame
+    private void saveButton() {
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new Dimension(400, 150));
+        ((JPanel) getContentPane()).setBorder(new EmptyBorder(13, 13, 13, 13));
+        setLayout(new FlowLayout());
+        JButton btn = new JButton("Save Schedule");
+        btn.setActionCommand("SaveButton");
+        btn.addActionListener(this);
+        add(btn);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: draws the load schedule button onto the JFrame
+    private void loadButton() {
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new Dimension(400, 150));
+        ((JPanel) getContentPane()).setBorder(new EmptyBorder(13, 13, 13, 13));
+        setLayout(new FlowLayout());
+        JButton btn = new JButton("Load Schedule");
+        btn.setActionCommand("LoadButton");
+        btn.addActionListener(this);
+        add(btn);
+    }
+
+    // MODIFIES: this
     // adds/removes task to schedule or loads/save schedule
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("myButton")) {
@@ -108,6 +187,8 @@ public class ScheduleItApplication extends JFrame implements ActionListener {
             } catch (FileNotFoundException error) {
                 System.out.println("Unable to write to file: " + JSON_STORE);
             }
+        } else if (e.getActionCommand().equals("complete")) {
+            completeTask();
         } else {
             try {
                 schedule = jsonReader.read();
@@ -116,6 +197,14 @@ public class ScheduleItApplication extends JFrame implements ActionListener {
                 System.out.println("Unable to read from file: " + JSON_STORE);
             }
         }
+    }
+
+
+    // EFFECTS: marks task as complete in schedule
+    private void completeTask() {
+        Task todo = new Task(field.getText(), Integer.parseInt(field2.getText()));
+        schedule.markAsComplete(todo);
+        showSchedule();
     }
 
     // MODIFIES: this
@@ -159,54 +248,6 @@ public class ScheduleItApplication extends JFrame implements ActionListener {
             JLabel label = new JLabel(details);
             displayTasks.add(label);
         }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: draws the remove task button onto the JFrame
-    private void removeTaskButton() {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(400, 150));
-        ((JPanel) getContentPane()).setBorder(new EmptyBorder(13, 13, 13, 13));
-        setLayout(new FlowLayout());
-        JButton btn = new JButton("Remove Task");
-        btn.setActionCommand("RemoveButton");
-        btn.addActionListener(this);
-
-        label = new JLabel("flag");
-        JLabel addTime = new JLabel("Time to clear:");
-        field3 = new JTextField(5);
-        add(addTime);
-        add(field3);
-        add(btn);
-        add(label);
-        pack();
-        setLocationRelativeTo(null);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: draws the save schedule button onto the JFrame
-    private void saveButton() {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(400, 150));
-        ((JPanel) getContentPane()).setBorder(new EmptyBorder(13, 13, 13, 13));
-        setLayout(new FlowLayout());
-        JButton btn = new JButton("Save Schedule");
-        btn.setActionCommand("SaveButton");
-        btn.addActionListener(this);
-        add(btn);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: draws the load schedule button onto the JFrame
-    private void loadButton() {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(400, 150));
-        ((JPanel) getContentPane()).setBorder(new EmptyBorder(13, 13, 13, 13));
-        setLayout(new FlowLayout());
-        JButton btn = new JButton("Load Schedule");
-        btn.setActionCommand("LoadButton");
-        btn.addActionListener(this);
-        add(btn);
     }
 
     // MODIFIES: this
