@@ -2,18 +2,13 @@
     "name": "My Schedule",
     "tasks": [
         {
-            "name": "dance",
-            "time": 8,
-            "status": "unfinished"
-        },
-        {
-            "name": "meeting",
-            "time": 10,
+            "name": "run",
+            "time": 7,
             "status": "complete"
         },
         {
-            "name": "lunch",
-            "time": 12,
+            "name": "brunch",
+            "time": 11,
             "status": "unfinished"
         }
     ]

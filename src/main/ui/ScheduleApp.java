@@ -1,5 +1,7 @@
 package ui;
 
+import exceptions.EmptyTaskListException;
+import exceptions.InvalidTimeException;
 import model.Schedule;
 import model.Task;
 import persistence.JsonReader;
@@ -98,7 +100,11 @@ public class ScheduleApp {
     private void doDelete() {
         System.out.println("Enter time: ");
         int time = input.nextInt();
-        mySchedule.deleteTask(time);
+        try {
+            mySchedule.deleteTask(time);
+        } catch (InvalidTimeException e) {
+            System.out.println("Time given is invalid. ");
+        }
 
     }
 
@@ -125,14 +131,22 @@ public class ScheduleApp {
         String taskName = getNextLine();
         System.out.println("Enter new time for task: ");
         int newTime = input.nextInt();
-        mySchedule.reschedule(mySchedule.findByName(taskName), newTime);
+        try {
+            mySchedule.reschedule(mySchedule.findByName(taskName), newTime);
+        } catch (InvalidTimeException e) {
+            System.out.println("New time given is invalid!");
+        }
     }
 
     //MODIFIES: this
     //EFFECTS: adds the list of tasks to schedule at appropriate time
     private void doAddNewTask() {
         ArrayList<Task> tasks = describeTasks();
-        mySchedule.addNewTask(tasks);
+        try {
+            mySchedule.addNewTask(tasks);
+        } catch (EmptyTaskListException e) {
+            System.out.println("Task list is empty!");
+        }
     }
 
     //EFFECTS: takes in task names with task times and creates a list of tasks

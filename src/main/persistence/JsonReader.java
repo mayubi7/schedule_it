@@ -1,5 +1,6 @@
 package persistence;
 
+import exceptions.EmptyTaskListException;
 import model.*;
 import model.Task;
 import org.json.JSONArray;
@@ -63,6 +64,10 @@ public class JsonReader {
             task.setStatus(status);
             tasks.add(task);
         }
-        s.addNewTask(tasks);
+        try {
+            s.addNewTask(tasks);
+        } catch (EmptyTaskListException e) {
+            System.out.println("Task list is empty!");
+        }
     }
 }

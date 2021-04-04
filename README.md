@@ -34,6 +34,9 @@ to add tags which can be set for a certain colour so that tasks have a certain c
 ##Phase 2 User Stories
 - As a user, I want to be able to save my schedule to file
 - As a user, I want to be able to load my schedule from file
+
+##Phase 4: Task 2
+- The class Schedule is robust, methods addNewTask, reschedule and deleteTask have been modified 
  
  
  

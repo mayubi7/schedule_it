@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.EmptyTaskListException;
+import exceptions.InvalidTimeException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -7,6 +9,7 @@ import persistence.Writable;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * A representation of a 24 hours schedule where tasks can be assigned to a 1 hour timeslot.
@@ -33,26 +36,34 @@ public class Schedule implements Writable {
         }
     }
 
-    //REQUIRES: ArrayList<Task> is non-empty
     //MODIFIES: this
-    //EFFECTS: assigns each task to its corresponding timeslot if timeslot is available
-    public void addNewTask(ArrayList<Task> task) {
-        for (int i = 0; i < task.size(); i++) {
-            if (mySchedule.get(task.get(i).getTime()) == null) {
-                mySchedule.set(task.get(i).getTime(), task.get(i));
-                task.get(i).setTime(task.get(i).getTime());
+    //EFFECTS: assigns each task in list to its corresponding timeslot if timeslot is available, throws exception if
+    // list of tasks is empty
+    public void addNewTask(ArrayList<Task> task) throws EmptyTaskListException {
+        if (task.size() == 0) {
+            throw new EmptyTaskListException();
+        } else {
+            for (int i = 0; i < task.size(); i++) {
+                if (mySchedule.get(task.get(i).getTime()) == null) {
+                    mySchedule.set(task.get(i).getTime(), task.get(i));
+                    task.get(i).setTime(task.get(i).getTime());
+                }
             }
         }
     }
 
-    //REQUIRES: int must be within 0-23
     //MODIFIES: this, task
-    //EFFECTS: assign task to a new time and remove task from previous time
-    public void reschedule(Task task, int newTime) {
-        int oldTime = task.getTime();
-        mySchedule.set(oldTime, null);
-        mySchedule.set(newTime, task);
-        task.setTime(newTime);
+    //EFFECTS: assign task to a new time and remove task from previous time, throws InvalidTimeException
+    // if new time given is not within 0-23
+    public void reschedule(Task task, int newTime) throws InvalidTimeException {
+        if (newTime < 0 | newTime > 23) {
+            throw new InvalidTimeException();
+        } else {
+            int oldTime = task.getTime();
+            mySchedule.set(oldTime, null);
+            mySchedule.set(newTime, task);
+            task.setTime(newTime);
+        }
     }
 
     //MODIFIES: this, task
@@ -65,9 +76,13 @@ public class Schedule implements Writable {
 
     //REQUIRES: hour must be from 0-23
     //MODIFIES: this
-    //EFFECTS: clears the task at the time from schedule
-    public void deleteTask(int hour) {
-        mySchedule.set(hour, null);
+    //EFFECTS: clears the task at the time from schedule, throws InvalidTimeException if time given is not within 0-23
+    public void deleteTask(int hour) throws InvalidTimeException {
+        if (hour < 0 | hour > 23) {
+            throw new InvalidTimeException();
+        } else {
+            mySchedule.set(hour, null);
+        }
     }
 
 

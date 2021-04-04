@@ -1,6 +1,8 @@
 package ui;
 
 
+import exceptions.EmptyTaskListException;
+import exceptions.InvalidTimeException;
 import model.Schedule;
 import model.Task;
 import persistence.JsonReader;
@@ -21,7 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+// GUI for Schedule Application
 public class ScheduleItApplication extends JFrame implements ActionListener {
 
     private static final int WIDTH = 1000;
@@ -212,7 +214,11 @@ public class ScheduleItApplication extends JFrame implements ActionListener {
     private void removeTask() {
         String details = field3.getText() + "hrs: cleared.";
         label.setText(details);
-        schedule.deleteTask(Integer.parseInt(field3.getText()));
+        try {
+            schedule.deleteTask(Integer.parseInt(field3.getText()));
+        } catch (InvalidTimeException e) {
+            System.out.println("Invalid time given.");
+        }
         showSchedule();
     }
 
@@ -224,7 +230,11 @@ public class ScheduleItApplication extends JFrame implements ActionListener {
         Task todo = new Task(field.getText(), Integer.parseInt(field2.getText()));
         ArrayList<Task> tasks = new ArrayList<>();
         tasks.add(todo);
-        schedule.addNewTask(tasks);
+        try {
+            schedule.addNewTask(tasks);
+        } catch (EmptyTaskListException e) {
+            System.out.println("Empty task given!");
+        }
         showSchedule();
     }
 

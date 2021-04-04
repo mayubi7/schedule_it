@@ -1,5 +1,7 @@
 package persistence;
 
+import exceptions.EmptyTaskListException;
+import exceptions.InvalidTimeException;
 import model.*;
 import model.Task;
 import org.junit.jupiter.api.Test;
@@ -54,7 +56,11 @@ public class JsonWriterTest extends JsonTest {
             Task todo2 = new Task("homework", 15);
             todos.add(todo1);
             todos.add(todo2);
-            s.addNewTask(todos);
+            try {
+                s.addNewTask(todos);
+            } catch (EmptyTaskListException e) {
+                fail("EmptyTaskListException thrown!");
+            }
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralSchedule.json");
             writer.open();
             writer.write(s);
