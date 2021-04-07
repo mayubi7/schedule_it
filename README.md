@@ -1,7 +1,6 @@
 # Schedule App
 
 
-
 **Project Proposal:**
 
 The application I am designing is a scheduling app. This app will help keep track of events and todo lists; hence,
