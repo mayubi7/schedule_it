@@ -46,6 +46,8 @@ to add tags which can be set for a certain colour so that tasks have a certain c
  - The buttons have lots of duplicated code, so I would design a helper function that would hold these lines of code. 
  Then, the functions making the buttons can call this helper function instead. 
  
+ The UML Design Diagram is under the package data. 
+ 
  
  
  
