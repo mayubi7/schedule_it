@@ -38,6 +38,13 @@ to add tags which can be set for a certain colour so that tasks have a certain c
 ##Phase 4: Task 2
 - The class Schedule is robust, methods addNewTask, reschedule and deleteTask have been modified 
  
+ ##Phase 4: Task 3
+ - In order to improve SRP, I would pull out buttons from ScheduleItApplication and give it a new class.
+ The ScheduleItApplication will then be only responsible for adding each part to the JFrame. 
+ This would also improve the readability of the class. 
+ - The buttons have lots of duplicated code, so I would design a helper function that would hold these lines of code. 
+ Then, the functions making the buttons can call this helper function instead. 
+ 
  
  
  
