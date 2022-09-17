@@ -22,7 +22,7 @@ to add tags which can be set for a certain colour so that tasks have a certain c
  increased. I have found that todo lists can be useful; however, the act of scheduling each task to a certain
   time has a significant impact on one's productivity and allows for more free-time! 
  
- ##User Stories
+ ## User Stories
  - As a user, I want to be able to any number of tasks with their times to my schedule
  - As a user, I want to be able to mark a task as completed on my weekly schedule
  - As a user, I want to be able to reschedule a task to a different time on my schedule
@@ -30,14 +30,14 @@ to add tags which can be set for a certain colour so that tasks have a certain c
  - As a user, I want to be able to view a list of all incomplete tasks for the day
  
  
-##Phase 2 User Stories
+## Phase 2 User Stories
 - As a user, I want to be able to save my schedule to file
 - As a user, I want to be able to load my schedule from file
 
-##Phase 4: Task 2
+## Phase 4: Task 2
 - The class Schedule is robust, methods addNewTask, reschedule and deleteTask have been modified 
  
- ##Phase 4: Task 3
+ ## Phase 4: Task 3
  - In order to improve SRP, I would pull out buttons from ScheduleItApplication and give it a new class.
  The ScheduleItApplication will then be only responsible for adding each part to the JFrame. 
  This would also improve the readability of the class. 
